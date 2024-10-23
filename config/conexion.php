@@ -1,29 +1,26 @@
 <?php 
-    class conectar {
-        public $dbh;
+    class Database {
+        protected $dbh;
 
-        public function conexion(){
+        protected function conexion(){
             try {
                 $conectar = $this->dbh = new PDO("mysql:host=localhost;dbname=webservices", "root", "");
-                echo "Conexión exitosa a la base de datos.<br>";
+                print "Conexión exitosa a la base de datos.<br>";
                 return $conectar;
             } catch (Exception $e) {
                 print "Error en la base de datos: " . $e->getMessage() . "<br>";
                 die();
             }
         }
-
+        public function iniciar_conexion(){
+            return $this -> conexion();
+        }
         public function set_names(){
-            if($this->dbh) {
-                return $this->dbh->query("SET NAMES 'utf8'");
-            } else {
-                echo "No hay conexión a la base de datos.<br>";
-                return false;
-            }
+            return $this->dbh->query("SET NAMES 'utf8'");
         }
     }
 
-    $db = new conectar();
-    $db->set_names();
-    $conectar = $db->conexion();
+    $db = new Database();
+    $db -> iniciar_conexion();
+    $db -> set_names();
 ?>
