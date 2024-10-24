@@ -19,8 +19,4 @@
             return $this->dbh->query("SET NAMES 'utf8'");
         }
     }
-
-    $db = new Database();
-    $db -> iniciar_conexion();
-    $db -> set_names();
 ?>
